@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oscar Owino | Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg2: #10182f;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-strong: rgba(255, 255, 255, 0.12);
+      --text: #eef2ff;
+      --muted: #cbd5e1;
+      --line: rgba(255, 255, 255, 0.12);
+      --accent: #7c3aed;
+      --accent2: #22c55e;
+      --accent3: #38bdf8;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius: 28px;
+      --radius-sm: 18px;
+      --max: 1180px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, 0.28), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(56, 189, 248, 0.2), transparent 24%),
+        radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.18), transparent 26%),
+        linear-gradient(180deg, var(--bg), var(--bg2));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(7, 11, 22, 0.72);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      min-height: 76px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      box-shadow: 0 10px 26px rgba(124, 58, 237, 0.35);
+      font-weight: 900;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--muted);
+      border: 1px solid transparent;
+      transition: 0.25s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      background: rgba(255,255,255,0.06);
+      border-color: var(--line);
+    }
+
+    .hero {
+      padding: 38px 0 28px;
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, rgba(255,255,255,0.10), rgba(255,255,255,0.04));
+      box-shadow: var(--shadow);
+      border-radius: 36px;
+      padding: 30px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.1rem, 4.5vw, 4.2rem);
+      line-height: 1.02;
+      letter-spacing: -0.03em;
+    }
+
+    .lead {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 66ch;
+      margin: 0 0 22px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-weight: 700;
+      transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.10); border-color: rgba(255,255,255,0.25); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #4f46e5);
+      border-color: transparent;
+      box-shadow: 0 16px 30px rgba(124, 58, 237, 0.25);
+    }
+
+    .hero-side {
+      display: grid;
+      place-items: center;
+      min-height: 420px;
+    }
+
+    .profile-shell {
+      width: min(100%, 390px);
+      aspect-ratio: 1 / 1.02;
+      border-radius: 32px;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(56, 189, 248, 0.35), transparent 18%),
+        radial-gradient(circle at 70% 70%, rgba(34, 197, 94, 0.26), transparent 18%),
+        linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.18), var(--shadow);
+    }
+
+    .profile-shell::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.12);
+      z-index: 1;
+    }
+
+    .profile-photo {
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.30);
+      border: 6px solid rgba(255,255,255,0.12);
+    }
+
+    .section {
+      padding: 22px 0;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .section-title .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      font-size: 1.1rem;
+    }
+
+    .section-title h3 {
+      margin: 0;
+      font-size: 1.6rem;
+    }
+
+    .section-title p {
+      margin: 3px 0 0;
+      color: var(--muted);
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .card-inner { padding: 24px; }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--line);
+      color: var(--text);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .muted { color: var(--muted); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+    }
+
+    .contact-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(124,58,237,0.9), rgba(56,189,248,0.9));
+      flex-shrink: 0;
+      font-size: 1.05rem;
+    }
+
+    .contact-item a, .contact-item span {
+      display: block;
+      word-break: break-word;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+    }
+
+    .timeline-item h4 {
+      margin: 0 0 6px;
+      font-size: 1.15rem;
+    }
+
+    .timeline-item .sub {
+      color: #dbeafe;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .timeline-item ul {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .timeline-item li { margin: 7px 0; }
+
+    .project {
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--line);
+    }
+
+    .project .tag {
+      display: inline-flex;
+      margin-bottom: 12px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(56,189,248,0.14);
+      color: #bae6fd;
+      border: 1px solid rgba(56,189,248,0.2);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .project h4 {
+      margin: 0 0 8px;
+      font-size: 1.18rem;
+    }
+
+    .project p { margin: 0; color: var(--muted); }
+
+    .small-list {
+      margin: 12px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 28px 0 40px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 0.95rem;
+    }
+
+    .section-spacer { margin-top: 6px; }
+
+    .message-form {
+      display: grid;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      margin: 0 0 8px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      font-family: var(--font);
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .form-group textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: rgba(203, 213, 225, 0.7);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: rgba(56, 189, 248, 0.45);
+      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.12);
+    }
+
+    .submit-wrap {
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid, .grid-2, .grid-3, .contact-grid, .form-row { grid-template-columns: 1fr; }
+      .hero-side { min-height: auto; }
+      .nav { flex-direction: column; align-items: flex-start; padding: 14px 0; }
+      .nav-links { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .hero-card { padding: 18px; border-radius: 28px; }
+      .card-inner { padding: 18px; }
+      .profile-photo { width: 190px; height: 190px; }
+      .section-title h3 { font-size: 1.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <div class="brand">
+        <div class="brand-mark">OO</div>
+        <div>
+          <div>Oscar Owino</div>
+          <div class="muted" style="font-size:0.88rem;">Computer Science | Data Science | Machine Learning</div>
+        </div>
+      </div>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">✨ Completed Computer Science, Egerton University</div>
+            <h1>Building intelligent, data-driven solutions for real-world problems.</h1>
+            <p class="lead">
+              I am Oscar Owino, a Computer Science student with a strong interest in Machine Learning, Data Science, Python programming, SQL,Excel and Power BI. I enjoy turning raw data into meaningful insights and designing decision-support systems for health, banking, finance, and digital services.
+            </p>
+            <div class="cta-row">
+              <a class="btn primary" href="mailto:owino4011@gmail.com">Email Me</a>
+              <a class="btn" href="#projects">View Projects</a>
+              <a class="btn" href="#contact">Contact Details</a>
+            </div>
+            <div class="section-spacer" style="margin-top:22px;">
+              <div class="pill-row">
+                <span class="pill">Python</span>
+                <span class="pill">SQL</span>
+                <span class="pill">Excel</span>
+                <span class="pill">Power BI</span>
+                <span class="pill">Machine Learning</span>
+                <span class="pill">Data Analysis</span>
+                <span class="pill">Problem Solving</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-side">
+            <div class="profile-shell">
+              <img src="C:\Users\Oscar's PC\OneDrive\MY PHOTOS\20260215_152108.jpg" alt="Oscar Owino profile photo" class="profile-photo" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-title">
+        <div class="icon">👤</div>
+        <div>
+          <h3>About Me</h3>
+        </div>
+      </div>
+      <div class="card"><div class="card-inner">
+        <p class="muted" style="margin:0;">
+          I am a motivated and analytical Computer Scientist from Egerton University with a growing specialization in data science and machine learning. I have hands-on experience in Python, SQL, Excel, data visualization, and exploratory data analysis, and I enjoy developing practical AI-driven systems that solve real-life challenges. My long-term goal is to grow into a highly effective Data Scientist who builds useful, scalable, and impactful solutions.
+        </p>
+      </div></div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-title">
+        <div class="icon">🧠</div>
+        <div>
+          <h3>Technical Skills</h3>
+        </div>
+      </div>
+      <div class="card"><div class="card-inner">
+        <div class="grid-2">
+          <div>
+            <h4 style="margin-top:0;">Core Technical Skills</h4>
+            <div class="pill-row">
+              <span class="pill">Python</span>
+              <span class="pill">SQL</span>
+              <span class="pill">Excel</span>
+              <span class="pill">Machine Learning</span>
+              <span class="pill">Power BI</span>
+              <span class="pill">Data Visualization</span>
+              <span class="pill">Data Cleaning</span>
+            </div>
+          </div>
+          <div>
+            <h4 style="margin-top:0;">Python Libraries</h4>
+            <p class="muted" style="margin:0;">
+              <strong style="color:var(--text);">pandas</strong> for exploratory data analysis and data manipulation; <strong style="color:var(--text);">NumPy</strong> for numerical computation and efficient array operations; <strong style="color:var(--text);">matplotlib</strong> and <strong style="color:var(--text);">seaborn</strong> for clear and professional data visualization.
+            </p>
+          </div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="experience" class="section">
+      <div class="section-title">
+        <div class="icon">💼</div>
+        <div>
+          <h3>Work Experience</h3>
+          <p>Practical exposure aligned with data, ICT, and innovation work.</p>
+        </div>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item">
+          <h4>Data Science / ICT Intern</h4>
+          <div class="sub">Ndoto For Africa's Future | May 2025 – August 2025</div>
+          <ul>
+            <li>Supported ICT hub operations, user assistance, and basic troubleshooting.</li>
+            <li>Assisted in data organization, cleaning, and preparation for reporting.</li>
+            <li>Contributed to data summaries and operational support using digital tools.</li>
+            <li>Helped maintain smooth ICT workflows and documentation processes.</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <h4>EUCOSSA Member and Hackathon Participant</h4>
+          <div class="sub">Egerton University Computer Science Students Association | 2024 – 2025</div>
+          <ul>
+            <li>Participated in hackathons and innovation challenges as part of student teams.</li>
+            <li>Applied Python, pandas, Power BI, and exploratory data analysis to large datasets.</li>
+            <li>Helped present insights and data-driven solutions in competitive settings.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-title">
+        <div class="icon">🚀</div>
+        <div>
+          <h3>Selected Projects</h3>
+          <p>Projects that show my ability to build useful decision tools.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="project">
+          <div class="tag">AI Decision Tool</div>
+          <h4>SmartLend Loan Approval System</h4>
+          <p>A machine learning-based system designed to automate loan approval assessment using applicant data and risk indicators.</p>
+          <a class="btn" href="https://smartlendintelligentloanapprovalpredictionsystem-kf8bdjjdcagdh.streamlit.app/" target="_blank" rel="noopener noreferrer" style="margin-top:12px;">Open Project</a>
+          <ul class="small-list">
+            <li>Built around classification and decision support.</li>
+            <li>Applied data preprocessing and model evaluation.</li>
+            <li>Useful for banking and finance workflows.</li>
+          </ul>
+        </div>
+        <div class="project">
+          <div class="tag">Health AI</div>
+          <h4>Fever Medication Recommendation System</h4>
+          <p>An intelligent system that recommends suitable medication options based on symptom-related inputs.</p>
+          <a class="btn" href="https://owino4011-enhanced-fever-medication-recommendation-app-uuqbxo.streamlit.app/" target="_blank" rel="noopener noreferrer" style="margin-top:12px;">Open Project</a>
+          <ul class="small-list">
+            <li>Focused on practical support in health contexts.</li>
+            <li>Improves speed and consistency of recommendations.</li>
+            <li>Built for real-world decision assistance.</li>
+          </ul>
+        </div>
+        <div class="project">
+          <div class="tag">Analytics & Visualization</div>
+          <h4>Big Data Analysis Projects</h4>
+          <p>Used Python libraries and Power BI to analyze large datasets and produce clear insights for decision-making.</p>
+          <ul class="small-list">
+            <li>Used pandas for exploratory data analysis.</li>
+            <li>Visualized data with matplotlib, seaborn, and Power BI.</li>
+            <li>Translated raw data into actionable information.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="section-title">
+        <div class="icon">🎓</div>
+        <div>
+          <h3>Education</h3>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div class="card"><div class="card-inner">
+          <h4 style="margin-top:0;">Egerton University</h4>
+          <p class="muted">Bachelor of Science in Computer Science</p>
+          <p class="muted">Completed</p>
+        </div></div>
+        <div class="card"><div class="card-inner">
+          <h4 style="margin-top:0;">Maranda High School</h4>
+          <p class="muted">KCSE: B+</p>
+        </div></div>
+        <div class="card"><div class="card-inner">
+          <h4 style="margin-top:0;">Ober Primary School</h4>
+          <p class="muted">KCPE: 401 marks</p>
+        </div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div class="icon">🏅</div>
+        <div>
+          <h3>Strengths & Highlights</h3>
+        </div>
+      </div>
+      <div class="card"><div class="card-inner">
+        <div class="grid-2">
+          <div>
+            <div class="pill-row">
+              <span class="pill">Fast learner</span>
+              <span class="pill">Adaptable</span>
+              <span class="pill">Team player</span>
+              <span class="pill">Detail-oriented</span>
+              <span class="pill">Strong communicator</span>
+            </div>
+          </div>
+          <div>
+            <p class="muted" style="margin:0;">
+              I combine technical curiosity with practical problem solving. I am comfortable working with data, supporting digital tools, collaborating in teams, and presenting findings clearly. My strongest interests are machine learning, data science, and building systems that automate decisions and improve outcomes.
+            </p>
+          </div>
+        </div>
+      </div></div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-title">
+        <div class="icon">✉️</div>
+        <div>
+          <h3>Contact & Social Links</h3>
+        </div>
+      </div>
+      <div class="contact-grid">
+        <div class="contact-item"><div class="contact-icon">M</div><div><span class="muted">Email</span><a href="mailto:owino4011@gmail.com">owino4011@gmail.com</a></div></div>
+        <div class="contact-item"><div class="contact-icon">P</div><div><span class="muted">Phone</span><a href="tel:+254791997865">0791997865</a></div></div>
+        <div class="contact-item"><div class="contact-icon">in</div><div><span class="muted">LinkedIn</span><a href="https://www.linkedin.com/in/oscar-owino/" target="_blank" rel="noopener noreferrer">linkedin.com/in/oscar-owino</a></div></div>
+        <div class="contact-item"><div class="contact-icon">GH</div><div><span class="muted">GitHub</span><a href="https://github.com/owino4011" target="_blank" rel="noopener noreferrer">github.com/owino4011</a></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-title">
+        <div class="icon">📝</div>
+        <div>
+          <h3>References</h3>
+        </div>
+      </div>
+      <div class="grid-2">
+        <div class="card"><div class="card-inner">
+          <h4 style="margin-top:0;">Mr. Jones Katiku</h4>
+          <p class="muted">0722440727</p>
+        </div></div>
+        <div class="card"><div class="card-inner">
+          <h4 style="margin-top:0;">Dr. George Odongo</h4>
+          <p class="muted">0722511513</p>
+        </div></div>
+      </div>
+    </section>
+
+    <section id="message" class="section">
+      <div class="section-title">
+        <div class="icon">📨</div>
+        <div>
+          <h3>Send Message</h3>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <form class="message-form" action="mailto:owino4011@gmail.com" method="post" enctype="text/plain">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="your-name">Your name</label>
+                <input type="text" id="your-name" name="your_name" placeholder="Enter your name" required />
+              </div>
+              <div class="form-group">
+                <label for="your-email">Email</label>
+                <input type="email" id="your-email" name="email" placeholder="Enter your email" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="your-message">Message</label>
+              <textarea id="your-message" name="message" placeholder="Write your message here" required></textarea>
+            </div>
+            <div class="submit-wrap">
+              <button class="btn primary" type="submit">Send Message</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      © <span id="year"></span> Oscar Owino.
+    </div>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
